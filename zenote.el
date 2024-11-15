@@ -44,26 +44,31 @@
 ;;;; ------------------ variables ------------------------------
 ;;;; ------------------  mode ------------------------------
 ;;;; mode keymap
-(defvar zenote-tree-mode-map nil "Keymap for `zenote-mode'")
+(defvar zenote-tree-mode-map nil "Keymap for `zenote-tree-mode'")
 (progn
-  (setq zenote-mode-map (make-sparse-keymap))
-  (define-key zenote-mode-map (kbd "<return>") 'zenote-item-open)
-  (define-key zenote-mode-map (kbd "j") 'zenote-item-next)
-  (define-key zenote-mode-map (kbd "k") 'zenote-item-prev)
-  (define-key zenote-mode-map (kbd "d") 'zenote-item-delete-confirm)
-  (define-key zenote-mode-map (kbd "D") 'zenote-item-delete)
-  (define-key zenote-mode-map (kbd "r") 'zenote-item-rename)
-  (define-key zenote-mode-map (kbd "i") 'zenote-item-insert-next)
-  (define-key zenote-mode-map (kbd "I") 'zenote-item-insert-prev)
-  (define-key zenote-mode-map (kbd "J") 'zenote-item-move-down)
-  (define-key zenote-mode-map (kbd "K") 'zenote-item-move-up)
-  (define-key zenote-mode-map (kbd "G") 'zenote-tree-update)
+  (setq zenote-tree-mode-map (make-sparse-keymap))
+  (define-key zenote-tree-mode-map (kbd "<return>") 'zenote-item-open)
+  (define-key zenote-tree-mode-map (kbd "j") 'zenote-item-next)
+  (define-key zenote-tree-mode-map (kbd "k") 'zenote-item-prev)
+  (define-key zenote-tree-mode-map (kbd "d") 'zenote-item-delete-confirm)
+  (define-key zenote-tree-mode-map (kbd "D") 'zenote-item-delete)
+  (define-key zenote-tree-mode-map (kbd "r") 'zenote-item-rename)
+  (define-key zenote-tree-mode-map (kbd "i") 'zenote-item-insert-next)
+  (define-key zenote-tree-mode-map (kbd "I") 'zenote-item-insert-prev)
+  (define-key zenote-tree-mode-map (kbd "J") 'zenote-item-move-down)
+  (define-key zenote-tree-mode-map (kbd "K") 'zenote-item-move-up)
+  (define-key zenote-tree-mode-map (kbd "G") 'zenote-tree-update)
   )
 
 ;;;###autoload
 (define-derived-mode zenote-mode org-mode
   "zenote"
-  (use-local-map zenote-mode-map)
+  )
+
+;;;###autoload
+(define-derived-mode zenote-tree-mode org-mode
+  "zenote-tree"
+  (use-local-map zenote-tree-mode-map)
   )
 
 ;;;; ------------------ function ------------------------------
@@ -79,7 +84,7 @@
       (zenote-tree-insert p)
       (cd p)
       (read-only-mode 1)
-      (zenote-mode)
+      (zenote-tree-mode)
       )
     (setq w (display-buffer-in-side-window new-buffer '((side . left)) ))
     (set-window-parameter w  'no-delete-other-windows t)
@@ -113,6 +118,7 @@
 	)
     (select-window  (window-right (selected-window)))
     (find-file item)
+    (zenote-mode)
     )
   )
 
