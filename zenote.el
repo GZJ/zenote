@@ -117,9 +117,13 @@
 
 (defun zenote-tree-update()
   (interactive)
-  (let ((inhibit-read-only t))
+  (let ((inhibit-read-only t)
+        (inhibit-redisplay t)
+        (inhibit-modification-hooks t))
+    (font-lock-mode -1)
     (erase-buffer)
     (zenote-tree-insert zenote-path)
+    (font-lock-mode 1)
     )
   )
 
