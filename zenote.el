@@ -207,7 +207,7 @@
   )
 
 (defun zenote-item-read()
-  (string-trim-right (thing-at-point 'line t)) ;;string-trim-right delete newline character
+  (buffer-substring-no-properties (line-beginning-position) (line-end-position))
   )
 
 (defun zenote-item-read-to-org-path()
