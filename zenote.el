@@ -42,6 +42,15 @@
   :group 'zenote)
 
 ;;;; ------------------ variables ------------------------------
+(defvar-local zenote-visual-active nil "Whether visual line mode is active.")
+(defvar-local zenote-visual-anchor nil "The anchor line number for visual selection.")
+(defvar-local zenote-visual-overlays nil "Overlays for visual selection highlighting.")
+
+(defface zenote-visual-selection-face
+  '((t :background "#3a3a5a" :extend t))
+  "Face for visual line selection in zenote tree."
+  :group 'zenote)
+
 ;;;; ------------------  mode ------------------------------
 ;;;; mode keymap
 (defvar zenote-tree-mode-map nil "Keymap for `zenote-tree-mode'")
@@ -58,6 +67,9 @@
   (define-key zenote-tree-mode-map (kbd "J") 'zenote-item-move-down)
   (define-key zenote-tree-mode-map (kbd "K") 'zenote-item-move-up)
   (define-key zenote-tree-mode-map (kbd "G") 'zenote-tree-update)
+  (define-key zenote-tree-mode-map (kbd "V") 'zenote-visual-enter)
+  (define-key zenote-tree-mode-map (kbd "y") 'zenote-yank-files)
+  (define-key zenote-tree-mode-map (kbd "<escape>") 'zenote-visual-exit)
   )
 
 ;;;###autoload
@@ -226,11 +238,92 @@
 (defun zenote-item-next()
   (interactive)
   (forward-line 1)
+  (when zenote-visual-active
+    (zenote-visual-update))
   )
 
 (defun zenote-item-prev()
   (interactive)
   (forward-line -1)
+  (when zenote-visual-active
+    (zenote-visual-update))
   )
+
+;;;; ------------------ visual line mode ------------------------------
+(defun zenote-visual-enter ()
+  "Toggle visual line selection mode."
+  (interactive)
+  (if zenote-visual-active
+      (zenote-visual-exit)
+    (setq zenote-visual-active t)
+    (setq zenote-visual-anchor (line-number-at-pos))
+    (zenote-visual-update)
+    (message "-- VISUAL LINE --")))
+
+(defun zenote-visual-exit ()
+  "Exit visual line selection mode."
+  (interactive)
+  (setq zenote-visual-active nil)
+  (setq zenote-visual-anchor nil)
+  (zenote-visual-clear-overlays)
+  (message ""))
+
+(defun zenote-visual-clear-overlays ()
+  "Clear all visual selection overlays."
+  (mapc #'delete-overlay zenote-visual-overlays)
+  (setq zenote-visual-overlays nil))
+
+(defun zenote-visual-update ()
+  "Update the visual selection highlighting."
+  (zenote-visual-clear-overlays)
+  (when zenote-visual-active
+    (let* ((current (line-number-at-pos))
+           (start (min zenote-visual-anchor current))
+           (end (max zenote-visual-anchor current)))
+      (save-excursion
+        (goto-char (point-min))
+        (forward-line (1- start))
+        (dotimes (_ (1+ (- end start)))
+          (let ((ov (make-overlay (line-beginning-position)
+                                  (min (1+ (line-end-position)) (point-max)))))
+            (overlay-put ov 'face 'zenote-visual-selection-face)
+            (push ov zenote-visual-overlays))
+          (forward-line 1))))))
+
+(defun zenote-visual-get-selected-items ()
+  "Get list of items in the visual selection, or current item if no selection."
+  (let (items)
+    (if zenote-visual-active
+        (let* ((current (line-number-at-pos))
+               (start (min zenote-visual-anchor current))
+               (end (max zenote-visual-anchor current)))
+          (save-excursion
+            (goto-char (point-min))
+            (forward-line (1- start))
+            (dotimes (_ (1+ (- end start)))
+              (let ((item (string-trim-right (thing-at-point 'line t))))
+                (when (and item (not (string-empty-p item)))
+                  (push item items)))
+              (forward-line 1))))
+      (let ((item (zenote-item-read)))
+        (when (and item (not (string-empty-p item)))
+          (push item items))))
+    (nreverse items)))
+
+(defun zenote-yank-files ()
+  "Copy selected file contents (or current file) to clipboard."
+  (interactive)
+  (let* ((items (zenote-visual-get-selected-items))
+         (contents ""))
+    (dolist (item items)
+      (let ((src (zenote-item-to-org-path item)))
+        (when (file-exists-p src)
+          (setq contents (concat contents (with-temp-buffer
+                                            (insert-file-contents src)
+                                            (buffer-string)) "\n")))))
+    (kill-new (string-trim-right contents))
+    (when zenote-visual-active
+      (zenote-visual-exit))
+    (message "Copied %d file(s) content to clipboard" (length items))))
 
 (provide 'zenote)
