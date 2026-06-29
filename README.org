@@ -39,8 +39,10 @@ Zenote is a minimalist note based on org. It presents the org files in the direc
 
 * Testing
 
-The repository includes a =test/= directory with sample notes. To try zenote:
+The repository includes a =test/= directory with sample notes. Try without any other config:
 
-#+begin_src elisp
-(zenote-tree-open (expand-file-name "test" (file-name-directory (locate-library "zenote"))))
+#+begin_src sh
+emacs -q --eval "(add-to-list 'load-path default-directory)" \
+      --eval "(require 'zenote)" \
+      --eval "(zenote-tree-open \"./test\")"
 #+end_src
