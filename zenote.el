@@ -86,6 +86,7 @@
   )
 
 ;;;; ------------------ function ------------------------------
+;;;###autoload
 (defun zenote-tree-open(path)
   (interactive)
   (unless (and path (file-directory-p path))
