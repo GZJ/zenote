@@ -3,8 +3,10 @@
 ;;; Copyright (C) 2023 GZJ
 
 ;; Author: GZJ <gzj00@outlook.com>
+;; URL: https://github.com/GZJ/zenote
 ;; Keywords: note
 ;; Version: 1.0.1
+;; Package-Requires: ((emacs "28.1"))
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
