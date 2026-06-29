@@ -42,7 +42,5 @@ Zenote is a minimalist note based on org. It presents the org files in the direc
 The repository includes a =test/= directory with sample notes. Try without any other config:
 
 #+begin_src sh
-emacs -q --eval "(add-to-list 'load-path default-directory)" \
-      --eval "(require 'zenote)" \
-      --eval "(zenote-tree-open \"./test\")"
+emacs -q --eval '(progn (add-to-list (quote load-path) default-directory) (require (quote zenote)) (zenote-tree-open "./test"))'
 #+end_src
