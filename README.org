@@ -13,13 +13,16 @@ Zenote is a minimalist note based on org. It presents the org files in the direc
 #+end_src
 
 * Keybindings
-- `j`: Move to the next note.
-- `k`: Move to the previous note.
-- `d`: Delete the current note (with confirmation).
-- `D`: Delete the current note (without confirmation).
-- `r`: Rename the current note.
-- `i`: Insert a new note after the current one.
-- `I`: Insert a new note before the current one
-- `J`: Move the current note down.
-- `K`: Move the current note up.
-- `G`: Update the zenote tree list.
+- =j=: Move to the next note.
+- =k=: Move to the previous note.
+- =d=: Delete the current note (with confirmation).
+- =D=: Delete the current note (without confirmation).
+- =r=: Rename the current note.
+- =i=: Insert a new note after the current one.
+- =I=: Insert a new note before the current one.
+- =J=: Move the current note down.
+- =K=: Move the current note up.
+- =G=: Update the zenote tree list.
+- =V=: Enter visual line selection mode.
+- =y=: Copy selected note contents to clipboard.
+- =Escape=: Exit visual line selection mode.
