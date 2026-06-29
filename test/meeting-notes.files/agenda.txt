@@ -1,0 +1,18 @@
+Meeting Agenda — 2024-01-15
+
+1. Project status updates (10 min)
+   - Backend: API v2 is 80% complete
+   - Frontend: Dashboard redesign in progress
+   - DevOps: CI pipeline stable
+
+2. Blockers and dependencies (15 min)
+   - Database migration decision needed
+   - Design review for new dashboard
+
+3. Next sprint planning (10 min)
+   - Prioritize items for Sprint 12
+   - Assign owners for top 3 features
+
+4. Open discussion (10 min)
+   - Team offsite planning
+   - Conference proposals

@@ -1,0 +1,49 @@
+#+TITLE: Getting Started with Zenote
+
+Welcome to Zenote, a minimalist note-taking system built on Emacs Org Mode.
+
+* What is Zenote?
+
+Zenote provides a sidebar tree view that lists all your org-mode notes in a directory. Navigate with Vim-style keys, and open notes with a single keystroke.
+
+* Quick Start
+
+#+BEGIN_SRC elisp
+(require 'zenote)
+(zenote-tree-open "~/notes")
+#+END_SRC
+
+This opens a sidebar with all =.org= files in the directory listed as a tree.
+
+* Key Bindings
+
+| Key       | Action                     |
+|-----------+----------------------------|
+| =j=       | Move to next note          |
+| =k=       | Move to previous note      |
+| =Enter=   | Open note in main window   |
+| =i=       | Insert note after current  |
+| =I=       | Insert note before current |
+| =d=       | Delete note (with confirm) |
+| =D=       | Delete note (no confirm)   |
+| =r=       | Rename current note        |
+| =J=       | Move note down             |
+| =K=       | Move note up               |
+| =G=       | Refresh tree view          |
+| =V=       | Visual line selection      |
+| =y=       | Copy selected content      |
+| =Escape=  | Exit visual mode           |
+
+* Directory Structure
+
+Zenote works with a flat directory of org files. The =.files/= convention is compatible with org-mode's attachment system:
+
+#+BEGIN_SRC text
+notes/
+├── getting-started.org
+├── reading-list.org
+├── project-ideas.org
+├── meeting-notes.org
+└── meeting-notes.files/   # org-mode attachments (ignored by zenote)
+    └── agenda.txt
+#+END_SRC

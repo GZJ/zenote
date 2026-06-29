@@ -1,0 +1,21 @@
+#+TITLE: Project Ideas
+
+A running list of project ideas with sub-notes for detailed task breakdowns.
+
+* Active
+
+- Blog engine based on org-mode
+- Note-taking plugin for Emacs
+- Cross-platform self-extracting archive tool
+
+* Backlog
+
+- Terminal-based RSS reader
+- Minimalist window manager helper
+- ASCII art gallery generator
+
+* Task Backlog
+
+- [ ] Design database schema for blog engine
+- [ ] Implement org-mode parser for note plugin
+- [ ] Write cross-platform build scripts for archive tool

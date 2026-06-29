@@ -1,0 +1,41 @@
+#+TITLE: Meeting Notes — 2024-01-15
+
+Weekly team sync meeting.
+
+* Attendees
+
+- Alice
+- Bob
+- Charlie
+
+* Agenda
+
+1. Project status updates
+2. Blockers and dependencies
+3. Next sprint planning
+
+* Discussion Points
+
+** Backend Migration
+
+Decided to migrate from PostgreSQL to SQLite for simpler deployment. Alice will lead the effort.
+
+** Frontend Redesign
+
+Bob shared mockups for the new dashboard. Team agreed on the direction. Target completion: end of Q1.
+
+* Attachments
+
+- =agenda.txt= — Full meeting agenda (in =meeting-notes.files/=)
+
+* Action Items
+
+- [ ] Alice: Start SQLite migration proof-of-concept
+- [ ] Bob: Finalize dashboard mockups by Friday
+- [ ] Charlie: Update CI pipeline for new build targets
+
+* Research Topics
+
+- Compare SQLite vs PostgreSQL for the backend migration
+- Evaluate React Server Components for the new dashboard
+- Review CI/CD tooling options

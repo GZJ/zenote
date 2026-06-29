@@ -1,0 +1,24 @@
+#+TITLE: Reading List
+
+A collection of books and articles worth reading.
+
+* Currently Reading
+
+- /Structure and Interpretation of Computer Programs/ — Abelson & Sussman
+- /The Pragmatic Programmer/ — Hunt & Thomas
+
+* Technical
+
+- /Designing Data-Intensive Applications/ — Kleppmann
+- /Crafting Interpreters/ — Nystrom
+- /Operating Systems: Three Easy Pieces/ — Arpaci-Dusseau
+
+* Non-Fiction
+
+- /Deep Work/ — Cal Newport
+- /Thinking, Fast and Slow/ — Daniel Kahneman
+
+* Want to Read
+
+- /The Art of Doing Science and Engineering/ — Richard Hamming
+- /A Philosophy of Software Design/ — John Ousterhout
