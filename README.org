@@ -36,3 +36,11 @@ Zenote is a minimalist note based on org. It presents the org files in the direc
 - =V=: Enter visual line selection mode.
 - =y=: Copy selected note contents to clipboard.
 - =Escape=: Exit visual line selection mode.
+
+* Testing
+
+The repository includes a =test/= directory with sample notes. To try zenote:
+
+#+begin_src elisp
+(zenote-tree-open (expand-file-name "test" (file-name-directory (locate-library "zenote"))))
+#+end_src
