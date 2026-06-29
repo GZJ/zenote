@@ -7,6 +7,16 @@
 
 Zenote is a minimalist note based on org. It presents the org files in the directory as a list.
 
+* Installation
+
+#+begin_src elisp
+(use-package zenote
+  :defer t
+  :vc (:url "https://github.com/GZJ/zenote"
+            :branch "master"
+            :rev :newest))
+#+end_src
+
 * Quickstart
 #+begin_src elisp
   (zenote-tree-open "[note path]")  
